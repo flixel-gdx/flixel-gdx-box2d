@@ -1,0 +1,13 @@
+bin/
+gen/
+dist/
+gwt-unitCache/
+deploy/
+classes/
+.gwt/
+
+*.jar
+*.so
+*.zip
+
+Thumbs.db
