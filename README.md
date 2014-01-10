@@ -1,3 +1,4 @@
+![Logo](http://s6.postimg.org/4ss0wc9ov/flxbox2d_banner.png)
 ##What is FlxBox2D?
 FlxBox2D is a wrapper for Box2D through libgdx. The Box2D is a full JNI wrapper which means there's no garabage collection issues at all and the JNI call overhead is minimal.
 
@@ -144,8 +145,8 @@ IB2FlxLister onHit = new IB2FlxListener()
 	}
 }
 ```
-`player` object can collide with `enemy` object (maskbit `ENEMY` vs `PLAYER`) and both got positive `groupIndex (1)`. This example was single object handling, but you can also collide single against group and group against group. Check this [example](https://github.com/flixel-gdx/flixel-gdx-examples/blob/master/flixel-examples-core/src/org/flixel/examples/box2d/TestCollisionDetection.java 'Collision test') for the rest of the code.
+`player` object can collide with `enemy` object (maskbit `ENEMY` vs `PLAYER`) and both got positive `groupIndex (1)`. This example was single object handling, but you can also collide single against group and group against group. Check this [example](https://github.com/flixel-gdx/flixel-gdx-box2d/blob/master/flixel-gdx-box2d-examples/src/org/flxbox2d/examples/TestCollisionDetection.java 'Collision test') for the rest of the code.
 
 **Examples**:
--	[Demos](https://github.com/flixel-gdx/flixel-gdx-examples/tree/master/flixel-examples-core/src/org/flixel/examples/box2d 'Box2D demos') to learn other classes.
+-	[Demos](https://github.com/flixel-gdx/flixel-gdx-box2d/tree/master/flixel-gdx-box2d-examples/src/org/flxbox2d/examples 'Box2D demos') to learn other classes.
 -	Advanced stuff with Box2D at [iforce2d](http://www.iforce2d.net/ 'iforce2d').

@@ -1,4 +1,4 @@
-package org.flxbox2d.objects;
+package org.flxbox2d.examples.objects;
 
 import org.flxbox2d.collision.shapes.B2FlxBox;
 

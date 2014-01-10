@@ -3,7 +3,7 @@ package org.flxbox2d.examples;
 import org.flixel.FlxG;
 import org.flxbox2d.collision.shapes.B2FlxBox;
 import org.flxbox2d.collision.shapes.B2FlxShape;
-import org.flxbox2d.objects.RagDoll;
+import org.flxbox2d.examples.objects.RagDoll;
 
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 

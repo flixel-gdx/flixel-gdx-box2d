@@ -1,4 +1,4 @@
-package org.flxbox2d.objects;
+package org.flxbox2d.examples.objects;
 
 import org.flixel.FlxG;
 import org.flixel.FlxGroup;
