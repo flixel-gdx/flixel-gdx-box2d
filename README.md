@@ -1,4 +1,4 @@
-![Logo](http://s6.postimg.org/4ss0wc9ov/flxbox2d_banner.png)
+![Logo](http://s6.postimg.org/ibqhj2u4x/flxbox2d_banner.png)
 ##What is FlxBox2D?
 FlxBox2D is a wrapper for Box2D through libgdx. The Box2D is a full JNI wrapper which means there's no garabage collection issues at all and the JNI call overhead is minimal.
 
