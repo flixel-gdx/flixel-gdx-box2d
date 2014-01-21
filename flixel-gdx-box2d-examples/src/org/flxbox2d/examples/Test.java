@@ -14,6 +14,7 @@ import org.flxbox2d.dynamics.joints.B2FlxMouseJoint;
 import org.flxbox2d.system.debug.B2FlxDebug;
 
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.reflect.ClassReflection;
 
 /**
  * A parent class for testing.
@@ -125,7 +126,7 @@ public class Test extends B2FlxState
 		{
 			try
 			{				
-				FlxG.switchState((B2FlxState)tests.get(currentTest).newInstance());
+				FlxG.switchState(ClassReflection.newInstance(tests.get(currentTest)));
 			}
 			catch(Exception e)
 			{
@@ -173,7 +174,7 @@ public class Test extends B2FlxState
 			currentTest = 0;
 		try
 		{				
-			FlxG.switchState((B2FlxState)tests.get(currentTest).newInstance());
+			FlxG.switchState(ClassReflection.newInstance(tests.get(currentTest)));
 		}
 		catch(Exception e)
 		{
@@ -188,7 +189,7 @@ public class Test extends B2FlxState
 			currentTest = tests.size-1;
 		try
 		{				
-			FlxG.switchState((B2FlxState)tests.get(currentTest).newInstance());
+			FlxG.switchState(ClassReflection.newInstance(tests.get(currentTest)));
 		}
 		catch(Exception e)
 		{
