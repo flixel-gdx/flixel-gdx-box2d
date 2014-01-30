@@ -12,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
  *
  * @author Ka Wing Chin
  */
-public class TestStack extends Test
+public class TestStack extends PlayState
 {
 	@Override
 	public void create()

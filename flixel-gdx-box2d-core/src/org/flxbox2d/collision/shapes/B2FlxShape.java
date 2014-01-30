@@ -509,6 +509,10 @@ public abstract class B2FlxShape extends FlxSprite
 			int tintColor = FlxU.multiplyColors(_color, camera.getColor());
 			framePixels.setColor(((tintColor >> 16) & 0xFF) * 0.00392f, ((tintColor >> 8) & 0xFF) * 0.00392f, (tintColor & 0xFF) * 0.00392f, _alpha);
 			
+			//rotate
+			if(_pixels.rotate)
+				framePixels.rotate90(false);
+			
 			if(isSimpleRender())
 			{ 	//Simple render
 				framePixels.setPosition(_point.x, _point.y);
@@ -536,7 +540,12 @@ public abstract class B2FlxShape extends FlxSprite
 				}
 				framePixels.draw(FlxG.batch);
 			}			
-		}		
+		}
+		
+		//re-rotate 
+		if(_pixels.rotate)
+			framePixels.rotate90(true);
+				
 		if(FlxG.visualDebug && !ignoreDrawDebug)
 			drawDebug(camera);
 	}

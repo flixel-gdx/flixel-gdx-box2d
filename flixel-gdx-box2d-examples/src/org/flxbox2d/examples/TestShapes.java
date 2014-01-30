@@ -11,7 +11,7 @@ import org.flxbox2d.collision.shapes.B2FlxSprite;
  *
  * @author Ka Wing Chin
  */
-public class TestShapes extends Test
+public class TestShapes extends PlayState
 {
 	@Override
 	public void create()
@@ -110,7 +110,7 @@ public class TestShapes extends Test
 			.setFriction(.2f)
 			.setDensity(.8f);		
 		sprite.createFixtureFromPolygon(polyshape, true);
-		/*
+		
 		polyshape = new B2FlxPolygon(0, 0, new float[][][]
 			{	
 				{{-32,-32},{64,-64},{32,32},{-32,32}}
@@ -118,8 +118,8 @@ public class TestShapes extends Test
 			.setRestitution(.3f)
 			.setFriction(.2f)
 			.setDensity(.8f)
-			.setSensor(true);		
-		sprite.createFixtureFromPolygon(polyshape, true);		*/
+			.setSensor(true);
+		sprite.createFixtureFromPolygon(polyshape, true);
 	}
 }
 

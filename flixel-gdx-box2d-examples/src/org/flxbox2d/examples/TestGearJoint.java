@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  * @author Ka Wing Chin
  */
-public class TestGearJoint extends Test
+public class TestGearJoint extends PlayState
 {
 
 	@Override

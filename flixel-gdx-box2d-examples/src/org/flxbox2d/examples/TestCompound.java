@@ -12,7 +12,7 @@ import org.flxbox2d.common.math.B2FlxMath;
  *
  * @author Ka Wing Chin
  */
-public class TestCompound extends Test
+public class TestCompound extends PlayState
 {
 	@Override
 	public void create()

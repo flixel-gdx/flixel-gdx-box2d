@@ -119,7 +119,9 @@ public class B2FlxDebug extends FlxBasic
 		Vector2 point = worldManifold.getPoints()[0];
 		point.x -= FlxG.camera.scroll.x / B2FlxB.RATIO;
 		point.y -= FlxG.camera.scroll.y / B2FlxB.RATIO;
-		renderer.drawCircle(point.x * B2FlxB.RATIO, point.y * B2FlxB.RATIO, 1f);
+		// TODO: BUG: invisible shape renderer when use circle
+//		renderer.drawCircle(point.x * B2FlxB.RATIO, point.y * B2FlxB.RATIO, 1f);
+		renderer.drawRect(point.x * B2FlxB.RATIO, point.y * B2FlxB.RATIO, 1f, 1f);
 	}
 }
 

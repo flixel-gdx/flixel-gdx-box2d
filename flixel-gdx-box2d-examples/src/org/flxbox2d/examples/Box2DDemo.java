@@ -12,7 +12,7 @@ public class Box2DDemo extends FlxGame
 {
 	public Box2DDemo()
 	{
-		super(640, 360, Test.class, 1, 50, 50, false, FlxCamera.FILL_X);
+		super(640, 360, PlayState.class, 1, 50, 50, false, FlxCamera.FILL_X);
 		forceDebugger = true;
 		FlxG.debug = true;
 	}

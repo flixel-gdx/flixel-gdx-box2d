@@ -17,7 +17,7 @@ import flash.display.BlendMode;
  *
  * @author Ka Wing Chin
  */
-public class TestCollisionDetection extends Test
+public class TestCollisionDetection extends PlayState
 {
 	private final String ImgPlayer = "examples/box2d/pack:player";
 	private final String ImgBoss = "examples/box2d/pack:boss";

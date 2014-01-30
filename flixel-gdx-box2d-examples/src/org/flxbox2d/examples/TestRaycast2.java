@@ -18,7 +18,7 @@ import flash.display.Graphics;
  *
  * @author Ka Wing Chin
  */
-public class TestRaycast2 extends Test
+public class TestRaycast2 extends PlayState
 {
 	RayCastClosestCallback ccallback = new RayCastClosestCallback();
 	Vector2 point1 = new Vector2();

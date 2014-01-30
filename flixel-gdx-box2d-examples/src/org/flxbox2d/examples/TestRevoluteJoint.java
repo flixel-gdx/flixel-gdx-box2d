@@ -8,7 +8,7 @@ import org.flxbox2d.dynamics.joints.B2FlxRevoluteJoint;
  *
  * @author Ka Wing Chin
  */
-public class TestRevoluteJoint extends Test
+public class TestRevoluteJoint extends PlayState
 {
 	@Override
 	public void create()

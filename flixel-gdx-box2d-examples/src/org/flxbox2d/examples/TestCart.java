@@ -14,7 +14,7 @@ import com.badlogic.gdx.Gdx;
  *
  * @author Ka Wing Chin
  */
-public class TestCart extends Test
+public class TestCart extends PlayState
 {
 	private B2FlxCircle _wheel1;
 	private B2FlxCircle _wheel2;

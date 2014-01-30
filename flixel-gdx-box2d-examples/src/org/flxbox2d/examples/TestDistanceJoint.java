@@ -8,7 +8,7 @@ import org.flxbox2d.dynamics.joints.B2FlxDistanceJoint;
  *
  * @author Ka Wing Chin
  */
-public class TestDistanceJoint extends Test
+public class TestDistanceJoint extends PlayState
 {
 	B2FlxDistanceJoint joint;
 	private B2FlxBox box1;

@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.Array;
  *
  * @author Ka Wing Chin
  */
-public class TestSensor extends Test
+public class TestSensor extends PlayState
 {
 	private final short CIRCLE = 0x0002;
 	private final short SENSOR = 0x0004;

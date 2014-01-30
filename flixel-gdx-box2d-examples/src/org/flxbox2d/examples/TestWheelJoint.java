@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  * @author Ka Wing Chin
  */
-public class TestWheelJoint extends Test
+public class TestWheelJoint extends PlayState
 {
 	@Override
 	public void create()

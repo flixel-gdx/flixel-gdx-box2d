@@ -15,7 +15,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
  *
  * @author Ka Wing Chin
  */
-public class TestBuoyancy extends Test
+public class TestBuoyancy extends PlayState
 {	
 	@Override
 	public void create()

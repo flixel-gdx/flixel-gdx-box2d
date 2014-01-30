@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  * @author Ka Wing Chin
  */
-public class TestPulleyJoint extends Test
+public class TestPulleyJoint extends PlayState
 {
 	@Override
 	public void create()

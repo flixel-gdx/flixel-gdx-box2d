@@ -18,7 +18,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
  *
  * @author Ka Wing Chin
  */
-public class TestBreakable extends Test
+public class TestBreakable extends PlayState
 {
 	private B2FlxShape _box;
 	private Vector2 _velocity = new Vector2();

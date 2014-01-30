@@ -8,7 +8,7 @@ import org.flxbox2d.dynamics.joints.B2FlxWeldJoint;
  *
  * @author Ka Wing Chin
  */
-public class TestWeldJoint extends Test
+public class TestWeldJoint extends PlayState
 {
 	@Override
 	public void create()

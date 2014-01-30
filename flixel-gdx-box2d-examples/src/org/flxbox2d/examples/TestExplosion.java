@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
  *
  * @author Ka Wing Chin
  */
-public class TestExplosion extends Test
+public class TestExplosion extends PlayState
 {
 	private FlxButton _button;
 	private ExplosionPlugin _explosion;

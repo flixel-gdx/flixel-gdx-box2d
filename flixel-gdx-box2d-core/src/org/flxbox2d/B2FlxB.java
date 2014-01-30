@@ -83,7 +83,7 @@ public class B2FlxB
 	/**
 	 * Internal, track whether to use the debugger or not.
 	 */
-	private static boolean _drawDebug;
+	private static B2FlxDebug _drawDebug;
 		
 	/**
 	 * Create vertices for polygon rendering.
@@ -186,11 +186,10 @@ public class B2FlxB
 			world = null;
 		}
 		
-		if(_drawDebug)
+		if(_drawDebug != null)
 		{
-			FlxG.getPlugin(B2FlxDebug.class).destroy();
-			FlxG.removePluginType(B2FlxDebug.class);			
-			_drawDebug = false;
+			FlxG.removePlugin(_drawDebug).destroy();
+			_drawDebug = null;
 		}		
 		
 		controllers.clear();
@@ -207,10 +206,9 @@ public class B2FlxB
 	
 	private static void initDebugger()
 	{
-		if(_drawDebug)
+		if(_drawDebug != null)
 			return;
-		_drawDebug = true;
-		FlxG.addPlugin(new B2FlxDebug());
+		_drawDebug = (B2FlxDebug) FlxG.addPlugin(new B2FlxDebug());
 	}
 
 	/**

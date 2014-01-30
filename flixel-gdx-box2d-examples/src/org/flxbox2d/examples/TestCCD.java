@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
  *
  * @author Ka Wing Chin
  */
-public class TestCCD extends Test
+public class TestCCD extends PlayState
 {
 	@Override
 	public void create()

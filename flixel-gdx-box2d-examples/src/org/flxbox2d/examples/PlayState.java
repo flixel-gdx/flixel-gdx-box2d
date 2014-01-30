@@ -13,18 +13,19 @@ import org.flxbox2d.collision.shapes.B2FlxShape;
 import org.flxbox2d.dynamics.joints.B2FlxMouseJoint;
 import org.flxbox2d.system.debug.B2FlxDebug;
 
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
 
 /**
  * A parent class for testing.
  * 
  * @author Ka Wing Chin
  */
-public class Test extends B2FlxState
+public class PlayState extends B2FlxState
 {
-	private static Array<Class<?extends FlxState>> tests;
 	public static int currentTest = 0;
+	private static final int AMOUNT_OF_TESTS = 24;
 	public FlxText title;
 	public FlxText info;
 	public B2FlxMouseJoint mouse;
@@ -35,6 +36,8 @@ public class Test extends B2FlxState
 	{		
 		super.create();
 		
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		
 		if(!FlxG.mobile)
 			FlxG.mouse.show();
 		
@@ -42,8 +45,9 @@ public class Test extends B2FlxState
 		FlxG.visualDebug = true;
 		FlxG.setBgColor(0xff000000);
 		
-		if(FlxG.mobile)
+		if(FlxG.mobile || Gdx.app.getType() == ApplicationType.WebGL)
 			B2FlxDebug.drawCollisions = false;
+		
 //		B2FlxDebug.drawAABBs = true;
 		
 		B2FlxB.world.setWarmStarting(true);
@@ -79,41 +83,7 @@ public class Test extends B2FlxState
 		
 		// Add mouse joint.
 		add(mouse = new B2FlxMouseJoint());
-		
-		if(tests == null)
-		{
-			tests = new Array<Class<? extends FlxState>>();
-			tests.add(TestShapes.class);			// Shapes
-			tests.add(TestDistanceJoint.class);		// DistanceJoint
-			tests.add(TestRopeJoint.class);			// RopeJoint
-			tests.add(TestRevoluteJoint.class);		// RevoluteJoint
-			tests.add(TestPrismaticJoint.class);	// PrismaticJoint
-			tests.add(TestPulleyJoint.class);		// PrismaticJoint
-			tests.add(TestGearJoint.class);			// GearJoint
-			tests.add(TestFrictionJoint.class);		// FrictionJoint
-			tests.add(TestWeldJoint.class);			// WeldJoint
-			tests.add(TestWheelJoint.class);		// WheelJoint
-			tests.add(TestCart.class);				// Cart
-			tests.add(TestRagdolls.class);			// Ragdolls
-			tests.add(TestCompound.class);			// Compound Shapes
-			tests.add(TestCrankGearsPulley.class);	// Crank Gears Pulley
-			tests.add(TestBridge.class);			// Bridge
-			tests.add(TestStack.class);				// Stack
-			tests.add(TestCCD.class);				// Continuous Collision Detection
-			tests.add(TestBuoyancy.class);			// Buouyancy 
-			tests.add(TestGravity.class);			// Gravity
-			tests.add(TestOneSidedPlatform.class);	// One Sided Platform
-			tests.add(TestBreakable.class);			// Breakable
-			tests.add(TestSensor.class);			// Sensor
-			tests.add(TestCollisionDetection.class);// Collision Detection
-			tests.add(TestExplosion.class);			// Explosion & Implosion
-						
-//			TheoJansen.class 			// Theo Jansen
-//			TestEdges.class,			// Edges
-//			TestRaycast.class,			// Raycast				
-		};			
-		
-		
+				
 		// Mobile
 		if(FlxG.mobile)
 		{
@@ -121,12 +91,12 @@ public class Test extends B2FlxState
 			add(createButton(82, FlxG.height - 20, "Next", new IFlxButton(){@Override public void callback(){next();}}));
 			add(createButton(162, FlxG.height - 20, "Reset", new IFlxButton(){@Override public void callback(){reset();}}));
 		}
-		
-		if(FlxU.getClassName(this, true).equals("Test"))
+		String className = FlxU.getClassName(this, true);
+		if(className.equals("PlayState") || className.equals("org.flxbox2d.examples.PlayState"))
 		{
 			try
-			{				
-				FlxG.switchState(ClassReflection.newInstance(tests.get(currentTest)));
+			{
+				switchState(currentTest);
 			}
 			catch(Exception e)
 			{
@@ -170,11 +140,11 @@ public class Test extends B2FlxState
 	
 	private void next()
 	{
-		if(tests.size <= ++currentTest)
+		if(AMOUNT_OF_TESTS <= ++currentTest)
 			currentTest = 0;
 		try
-		{				
-			FlxG.switchState(ClassReflection.newInstance(tests.get(currentTest)));
+		{
+			switchState(currentTest);
 		}
 		catch(Exception e)
 		{
@@ -186,16 +156,103 @@ public class Test extends B2FlxState
 	private void prev()
 	{
 		if(0 > --currentTest)
-			currentTest = tests.size-1;
+			currentTest = AMOUNT_OF_TESTS-1;
 		try
-		{				
-			FlxG.switchState(ClassReflection.newInstance(tests.get(currentTest)));
+		{
+			switchState(currentTest);
 		}
 		catch(Exception e)
 		{
 			FlxG.log(e.getMessage());
 			return;
 		}
+	}
+	
+	private void switchState(int current)
+	{
+		FlxState state = null;
+		switch(current)
+		{			
+			case 0:
+				state = new TestShapes(); 
+				break;
+			case 1:
+				state = new TestDistanceJoint();
+				break;
+			case 2:
+				state = new TestRopeJoint(); 
+				break;
+			case 3:
+				state = new TestRevoluteJoint(); 
+				break;
+			case 4:
+				state = new TestPrismaticJoint(); 
+				break;
+			case 5:
+				state = new TestPulleyJoint(); 
+				break;
+			case 6:
+				state = new TestGearJoint(); 
+				break;
+			case 7:
+				state = new TestFrictionJoint(); 
+				break;
+			case 8:
+				state = new TestWeldJoint(); 
+				break;
+			case 9:
+				state = new TestWheelJoint(); 
+				break;
+			case 10:
+				state = new TestCart(); 
+				break;
+			case 11:
+				state = new TestRagdolls(); 
+				break;
+			case 12:
+				state = new TestCompound(); 
+				break;
+			case 13:
+				state = new TestCrankGearsPulley(); 
+				break;
+			case 14:
+				state = new TestBridge(); 
+				break;
+			case 15:
+				state = new TestStack(); 
+				break;
+			case 16:
+				state = new TestCCD(); // Continuous Collision Detection
+				break;
+			case 17:
+				state = new TestBuoyancy(); 
+				break;
+			case 18:
+				state = new TestGravity(); 
+				break;
+			case 19:
+				state = new TestOneSidedPlatform(); 
+				break;
+			case 20:
+				state = new TestBreakable(); 
+				break;
+			case 21:
+				state = new TestSensor(); 
+				break;
+			case 22:
+				state = new TestCollisionDetection(); 
+				break;
+			case 23:
+				state = new TestExplosion(); // Explosion & Implosion
+				break;
+			default:
+				break;
+		}
+		if(state != null)
+			FlxG.switchState(state);	
+//		TheoJansen.class 			// Theo Jansen
+//		TestEdges.class,			// Edges
+//		TestRaycast.class,			// Raycast
 	}
 	
 	private void reset()

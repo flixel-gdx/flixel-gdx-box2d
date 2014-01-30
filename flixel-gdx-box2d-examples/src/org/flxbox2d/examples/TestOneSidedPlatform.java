@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
  *
  * @author Ka Wing Chin
  */
-public class TestOneSidedPlatform extends Test
+public class TestOneSidedPlatform extends PlayState
 {	
 	public float top;
 	public float bottom;

@@ -8,7 +8,7 @@ import org.flxbox2d.dynamics.joints.B2FlxRopeJoint;
  *
  * @author Ka Wing Chin
  */
-public class TestRopeJoint extends Test
+public class TestRopeJoint extends PlayState
 {
 	@Override
 	public void create()

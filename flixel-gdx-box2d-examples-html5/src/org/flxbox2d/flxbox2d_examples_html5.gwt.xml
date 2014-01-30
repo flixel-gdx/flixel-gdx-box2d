@@ -7,10 +7,5 @@
 	<set-property name="user.agent" value="safari"/>	
 	<entry-point class='org.flxbox2d.client.FlxBox2DExamplesStarter' />
 	<set-configuration-property name="gdx.assetpath" value="../flixel-gdx-box2d-examples-android/assets" />
-	
-	<extend-configuration-property name="gdx.reflect.include" value="org.flxbox2d.examples" />
-	<extend-configuration-property name="gdx.reflect.exclude" value="org.flxbox2d.examples.Box2DDemo" />
-	<extend-configuration-property name="gdx.reflect.exclude" value="org.flxbox2d.examples.Cache" />
-	<extend-configuration-property name="gdx.reflect.exclude" value="org.flxbox2d.examples.objects.Ghost" />
-	<extend-configuration-property name="gdx.reflect.exclude" value="org.flxbox2d.examples.objects.RagDoll" />
+	<extend-configuration-property name="gdx.reflect.include" value="org.flxbox2d.examples.PlayState" />
 </module>

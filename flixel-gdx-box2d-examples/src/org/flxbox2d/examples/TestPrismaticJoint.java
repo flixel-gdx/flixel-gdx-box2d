@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  * @author Ka Wing Chin
  */
-public class TestPrismaticJoint extends Test
+public class TestPrismaticJoint extends PlayState
 {
 	@Override
 	public void create()

@@ -19,7 +19,7 @@ import flash.display.Graphics;
  * 
  * @author Ka Wing Chin
  */
-public class TestRaycast extends Test
+public class TestRaycast extends PlayState
 {
 	private B2FlxBox box;
 	private RayCastAnyCallback callback;

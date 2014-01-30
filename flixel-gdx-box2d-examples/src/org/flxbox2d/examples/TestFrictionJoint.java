@@ -8,7 +8,7 @@ import org.flxbox2d.dynamics.joints.B2FlxFrictionJoint;
  *
  * @author Ka Wing Chin
  */
-public class TestFrictionJoint extends Test
+public class TestFrictionJoint extends PlayState
 {
 	@Override
 	public void create()

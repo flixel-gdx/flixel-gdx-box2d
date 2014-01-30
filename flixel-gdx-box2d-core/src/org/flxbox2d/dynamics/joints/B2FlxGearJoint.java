@@ -1,5 +1,6 @@
 package org.flxbox2d.dynamics.joints;
 
+import org.flixel.FlxG;
 import org.flixel.FlxU;
 import org.flxbox2d.B2FlxB;
 import org.flxbox2d.collision.shapes.B2FlxShape;
@@ -84,8 +85,9 @@ public class B2FlxGearJoint extends B2FlxJoint
 	 * @return	This joint. Handy for chaining stuff together.
 	 */
 	public B2FlxGearJoint setJoint1(Joint joint1)
-	{		
-		if(!FlxU.getClassName(joint1, true).equals("RevoluteJoint") && !FlxU.getClassName(joint1, true).equals("PrismaticJoint"))
+	{
+		if(!FlxU.getClassName(joint1, false).equals("com.badlogic.gdx.physics.box2d.joints.RevoluteJoint") 
+		&& !FlxU.getClassName(joint1, false).equals("com.badlogic.gdx.physics.box2d.joints.PrismaticJoint"))
 			throw new Error("The joint must be either a revolute or prismatic joint!");
 		((GearJointDef)jointDef).joint1 = joint1;
 		return this;
@@ -98,7 +100,8 @@ public class B2FlxGearJoint extends B2FlxJoint
 	 */
 	public B2FlxGearJoint setJoint2(Joint joint2)
 	{
-		if(!FlxU.getClassName(joint2, true).equals("RevoluteJoint") && !FlxU.getClassName(joint2, true).equals("PrismaticJoint"))
+		if(!FlxU.getClassName(joint2, false).equals("com.badlogic.gdx.physics.box2d.joints.RevoluteJoint") 
+		&& !FlxU.getClassName(joint2, false).equals("com.badlogic.gdx.physics.box2d.joints.PrismaticJoint"))
 			throw new Error("The joint must be either a revolute or prismatic joint!");
 		((GearJointDef)jointDef).joint2 = joint2;
 		return this;

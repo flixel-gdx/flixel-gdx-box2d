@@ -5,7 +5,7 @@ package org.flxbox2d.examples;
  *
  * @author Ka Wing Chin
  */
-public class TestCache extends Test
+public class TestCache extends PlayState
 {
 	@Override
 	public void create()
