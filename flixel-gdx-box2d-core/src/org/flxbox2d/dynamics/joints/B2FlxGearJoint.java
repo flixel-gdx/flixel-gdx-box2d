@@ -1,6 +1,5 @@
 package org.flxbox2d.dynamics.joints;
 
-import org.flixel.FlxG;
 import org.flixel.FlxU;
 import org.flxbox2d.B2FlxB;
 import org.flxbox2d.collision.shapes.B2FlxShape;

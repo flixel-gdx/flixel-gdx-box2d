@@ -150,3 +150,5 @@ IB2FlxLister onHit = new IB2FlxListener()
 **Examples**:
 -	[Demos](https://github.com/flixel-gdx/flixel-gdx-box2d/tree/master/flixel-gdx-box2d-examples/src/org/flxbox2d/examples 'Box2D demos') to learn other classes.
 -	Advanced stuff with Box2D at [iforce2d](http://www.iforce2d.net/ 'iforce2d').
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/flixel-gdx/flixel-gdx-box2d/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
