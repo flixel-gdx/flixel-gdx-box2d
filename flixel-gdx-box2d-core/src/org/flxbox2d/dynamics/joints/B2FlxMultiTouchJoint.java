@@ -1,12 +1,10 @@
 package org.flxbox2d.dynamics.joints;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.flixel.FlxBasic;
 import org.flixel.FlxG;
 import org.flxbox2d.B2FlxState;
+
+import com.badlogic.gdx.utils.ObjectMap;
 
 /**
  * Like mouse joint, but supports multiple pointers.
@@ -22,7 +20,7 @@ public class B2FlxMultiTouchJoint extends FlxBasic
 	/**
 	 * Map of pointer indices and models
 	 */
-	private Map<Integer, B2FlxMouseJoint> _pointers;
+	private ObjectMap<Integer, B2FlxMouseJoint> _pointers;
 
 	/**
 	 * Constructor
@@ -30,7 +28,7 @@ public class B2FlxMultiTouchJoint extends FlxBasic
 	public B2FlxMultiTouchJoint(B2FlxState State) 
 	{
 		_state = State;
-		_pointers = new ConcurrentHashMap<Integer, B2FlxMouseJoint>();
+		_pointers = new ObjectMap<Integer, B2FlxMouseJoint>();
 	}
 
 	/**
@@ -95,15 +93,9 @@ public class B2FlxMultiTouchJoint extends FlxBasic
 	 */
 	private void mouseUp() 
 	{
-		Iterator<B2FlxMouseJoint> pointerIterator = _pointers.values().iterator();
-		while(pointerIterator.hasNext()) 
+		for(B2FlxMouseJoint pointer : _pointers.values())
 		{
-			B2FlxMouseJoint pointer = pointerIterator.next();
-			if(pointer.mouseUp()) 
-			{
-				_state.remove(pointer);
-				_pointers.remove(pointer.getPointer());
-			}
+			pointer.mouseUp();
 		}
 	}
 
