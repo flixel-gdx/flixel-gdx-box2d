@@ -389,13 +389,13 @@ public abstract class B2FlxJoint extends FlxBasic
 	
 	public B2FlxJoint setAnchorA(Vector2 anchorA)
 	{
-		this.anchorA = anchorA;
+		this.anchorA.set(anchorA);
 		return this; 
 	}
 	
 	public B2FlxJoint setAnchorB(Vector2 anchorB)
 	{
-		this.anchorB = anchorB;
+		this.anchorB.set(anchorB);
 		return this;
 	}
 	

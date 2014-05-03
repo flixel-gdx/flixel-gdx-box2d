@@ -154,13 +154,13 @@ public class B2FlxPulleyJoint extends B2FlxJoint
 	
 	public B2FlxPulleyJoint setGroundAnchorA(Vector2 groundAnchorA)
 	{
-		_groundAnchorA = groundAnchorA;
+		_groundAnchorA.set(groundAnchorA);
 		return this;
 	}
 	
 	public B2FlxPulleyJoint setGroundAnchorB(Vector2 groundAnchorB)
 	{
-		_groundAnchorB = groundAnchorB;
+		_groundAnchorB.set(groundAnchorB);
 		return this;
 	}
 	

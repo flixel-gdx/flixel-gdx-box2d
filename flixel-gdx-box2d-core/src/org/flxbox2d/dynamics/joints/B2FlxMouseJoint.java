@@ -7,7 +7,6 @@ import org.flxbox2d.B2FlxB;
 import org.flxbox2d.system.debug.B2FlxDebug;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -46,7 +45,7 @@ public class B2FlxMouseJoint extends FlxBasic
 	/**
 	 * The point where the pointer got hit.
 	 */
-	private Vector3 _testPoint;
+	private Vector2 _testPoint;
 	/**
 	 * The target of the current mouse when pressed in box2d world.
 	 */
@@ -78,7 +77,7 @@ public class B2FlxMouseJoint extends FlxBasic
 	{
 		_mouseJointDef = new MouseJointDef();
 		_groundBody = B2FlxB.world.createBody(new BodyDef());
-		_testPoint = new Vector3();
+		_testPoint = new Vector2();
 		_mouseTarget = new Vector2();
 		_removeBySchedule = false;
 	}
@@ -112,7 +111,7 @@ public class B2FlxMouseJoint extends FlxBasic
 		if(_mouseJoint == null && FlxG.mouse.justPressed())
 		{
 			_hitBody = null;
-			_testPoint.set(_mouseWorldX, _mouseWorldY, 0);
+			_testPoint.set(_mouseWorldX, _mouseWorldY);
 			B2FlxB.world.QueryAABB(getBodyCallback, _testPoint.x - 0.0001f, _testPoint.y - 0.0001f, _testPoint.x + 0.0001f, _testPoint.y + 0.0001f);
 			
 			if (_hitBody == _groundBody || _hitBody == null)

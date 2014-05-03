@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/flixel-core"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-box2d.jar" sourcepath="libs/gdx-box2d-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

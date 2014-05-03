@@ -94,7 +94,7 @@ public class B2FlxWheelJoint extends B2FlxJoint
 	
 	public B2FlxWheelJoint setAxis(Vector2 axis)
 	{
-		_axis = axis;
+		_axis.set(axis);
 		return this;
 	}
 	

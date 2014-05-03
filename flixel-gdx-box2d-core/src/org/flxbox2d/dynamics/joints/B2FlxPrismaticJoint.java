@@ -103,7 +103,7 @@ public class B2FlxPrismaticJoint extends B2FlxJoint
 	 */
 	public B2FlxPrismaticJoint setAxis(Vector2 axis)
 	{
-		_axis = axis;
+		_axis.set(axis);
 		return this;
 	}
 	

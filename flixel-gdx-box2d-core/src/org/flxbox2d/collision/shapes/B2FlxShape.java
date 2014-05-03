@@ -11,7 +11,6 @@ import org.flxbox2d.common.math.B2FlxMath;
 import org.flxbox2d.dynamics.joints.B2FlxJoint;
 import org.flxbox2d.system.debug.B2FlxDebug;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -240,7 +239,7 @@ public abstract class B2FlxShape extends FlxSprite
 	{
 		if(body != null)
 		{
-			position = body.getPosition();
+			position.set(body.getPosition());
 			x = position.x * B2FlxB.RATIO - width * .5f;
 			y = position.y * B2FlxB.RATIO - height * .5f;			
 			
@@ -531,7 +530,7 @@ public abstract class B2FlxShape extends FlxSprite
 					int[] blendFunc = BlendMode.getOpenGLBlendMode(blend);
 					FlxG.batch.setBlendFunction(blendFunc[0], blendFunc[1]);
 				}
-				else if(Gdx.graphics.isGL20Available() && (FlxG.batchShader == null || ignoreBatchShader))
+				else if(FlxG.batchShader == null || ignoreBatchShader)
 				{
 					// OpenGL ES 2.0 shader render
 					renderShader();
@@ -705,8 +704,8 @@ public abstract class B2FlxShape extends FlxSprite
 		for(int i = 0; i < vertexCount; i++) 
 		{
 			Vector2 v = vertices[i].scl(B2FlxB.RATIO);
-			v.x -= (camera.scroll.x * scrollFactor.x) - offset.x;
-			v.y -= (camera.scroll.y * scrollFactor.y) - offset.y;
+			v.x -= (camera.scroll.x * scrollFactor.x);
+			v.y -= (camera.scroll.y * scrollFactor.y);
 			if(i == 0) 
 			{
 				f.set(v);
@@ -738,8 +737,8 @@ public abstract class B2FlxShape extends FlxSprite
 		for(int i = 0; i < 20; i++, angle += angleInc) 
 		{
 			v.set(MathUtils.cos(angle) * radius + center.x, MathUtils.sin(angle) * radius + center.y).scl(B2FlxB.RATIO);
-			v.x -= (camera.scroll.x * scrollFactor.x) - offset.x;
-			v.y -= (camera.scroll.y * scrollFactor.y) - offset.y;
+			v.x -= (camera.scroll.x * scrollFactor.x);
+			v.y -= (camera.scroll.y * scrollFactor.y);
 			if (i == 0) 
 			{
 				f.set(v);
@@ -752,8 +751,8 @@ public abstract class B2FlxShape extends FlxSprite
 		graphics.lineTo(f.x, f.y);
 		center.scl(B2FlxB.RATIO);
 		axis.scl(B2FlxB.RATIO);
-		center.x -= (camera.scroll.x * scrollFactor.x) - offset.x;
-		center.y -= (camera.scroll.y * scrollFactor.y) - offset.y;
+		center.x -= (camera.scroll.x * scrollFactor.x);
+		center.y -= (camera.scroll.y * scrollFactor.y);
 		graphics.moveTo(center.x, center.y);
 		graphics.lineTo(center.x + axis.x * radius, center.y + axis.y * radius);
 	}
