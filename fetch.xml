@@ -1,0 +1,24 @@
+<project name="fetch-libraries" default="all">
+	
+	<property name="domain" value="http://flixel-gdx.com/dist"/>
+	
+	<property name="folder.dest" 		 value="flixel-gdx-box2d-core/libs"/>
+	<property name="folder.dest.desktop"     value="flixel-gdx-box2d-desktop/libs"/>
+	
+	<!-- Download the libgdx box2d library an -->		
+	<target name="download">
+		<get src="${domain}/extensions/gdx-box2d/gdx-box2d.jar" 		dest="${folder.dest}/gdx-box2d.jar"                 usetimestamp="true"/>
+		<get src="${domain}/extensions/gdx-box2d/gdx-box2d-natives.jar"         dest="${folder.dest.desktop}/gdx-box2d-natives.jar" usetimestamp="true"/>
+	</target>
+	
+	<!-- Clean the old dependecies  -->
+	<target name="clean">
+		 <delete dir="${folder.dest}"/>
+		 <delete dir="${folder.dest.desktop}"/>
+		 
+		 <mkdir dir="${folder.dest}"/>		
+		 <mkdir dir="${folder.dest.desktop}"/>		
+	</target>
+	
+	<target name="all" depends="clean,download"/>
+</project>

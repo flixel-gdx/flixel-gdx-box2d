@@ -1,0 +1,243 @@
+<?xml version="1.0" ?>
+<project name="flixel-gdx-box2d" default="build" basedir=".">
+
+	<!--
+		Author: Emanuel Herrera
+		Base on:
+		https://github.com/flixel-gdx/flixel-gdx/blob/master/build.xml
+	-->
+
+	<!-- Global variables --> 
+	<property name="dist.dir"       value="dist/" />
+	<property name="spec.title"     value="flixel-gdx" />
+	<property name="spec.version"   value="0.6-SNAPSHOT" />
+	<property name="spec.vendor"    value="flixel-gdx team (https://github.com/orgs/flixel-gdx/people)" />
+	<property name="impl.title"     value="org.flixel" />
+	<property environment="env"/>
+
+	<!-- clean distribution/output directory -->
+	<target name="clean">
+		<delete dir="${dist.dir}"/>
+	</target>
+
+	<target name="build">
+	    
+		<echo>                                                          
+	    ________    _____  __ ________         __________ _  __      ____  ____ _  _____   ____ 
+	   / ____/ /   /  _/ |/ // ____/ /        / ____/ __ \ |/ /     / __ )/ __ \ |/ /__ \ / __ \
+	  / /_  / /    / / |   // __/ / /  ______/ / __/ / / /   /_____/ __  / / / /   /__/ // / / /
+	 / __/ / /____/ / /   |/ /___/ /__/_____/ /_/ / /_/ /   /_____/ /_/ / /_/ /   |/ __// /_/ / 
+	/_/   /_____/___//_/|_/_____/_____/     \____/_____/_/|_|    /_____/\____/_/|_/____/_____/                                                                                          
+		</echo>
+		                                                                                  		    
+		<echo message="version ${spec.version}" />	
+
+		<antcall target="clean" />
+		
+		<!-- Compile the core -->		    	
+		<antcall target="compile-core" />
+        
+		<!-- Generate javadoc -->
+		<antcall target="generate-doc" />
+        
+		<!-- Save all in the single zip file -->
+		<antcall target="compress-dist" />
+
+	</target>
+
+	<target name="compile-core">
+
+		<echo message="---------------------------------------------"/>
+		<echo message="Start Compile: Core"/>
+		<echo message="---------------------------------------------"/>
+
+		<property name="src.dir"          value="${ant.project.name}-core/src/" />
+		<property name="bin.dir"          value="${ant.project.name}-core/bin/" />
+		<property name="bin.lib"          value="${ant.project.name}-core/libs" />
+		
+		<!-- Clean old build -->
+		<delete dir="${bin.dir}" />
+		
+		<!-- Clean dependency  -->
+		<delete dir="${bin.lib}" />
+		
+		<!-- Download the libgdx box2d using the fetch.xml file -->
+		<ant antfile="./fetch.xml"/>
+		
+		<!-- We need the flixel-gdx binary for complile this plugin -->		
+		<copy file="../flixel-gdx/dist/flixel-core.jar" 	tofile="${bin.lib}/flixel-core.jar"/>
+		<copy file="../flixel-gdx/flixel-core/libs/gdx.jar" tofile="${bin.lib}/gdx.jar"/>
+
+		<!-- Get dependency from the libs directory -->
+		<path id="classpath">
+			<fileset dir="${bin.lib}">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+
+		<!-- Create the directory for the .class files -->
+		<mkdir dir="${bin.dir}" />
+
+		<!-- COMPILE!!!!!! -->
+		<javac includeantruntime="false" srcdir="${src.dir}" destdir="${bin.dir}" classpathref="classpath" target="1.6" source="1.6"/>
+		
+		<!-- Copy resources -->
+		<copy toDir="${bin.dir}">
+		    <fileset dir="${src.dir}">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+
+		<echo message="---------------------------------------------"/>
+		<echo message="End Compile: Core"/>
+		<echo message="---------------------------------------------"/>
+
+		<!-- Save .class in a jar file -->
+		<antcall target="packaging">
+			<param name="project" value="core"/>
+		</antcall>
+
+	</target>
+
+	<target name="packaging">
+
+		<!-- The project name: core, desktop, android -->
+
+		<echo message="---------------------------------------------"/>
+		<echo message="Start packaging: ${project}"/>
+		<echo message="---------------------------------------------"/>
+
+		<property name="src.dir"          value="${ant.project.name}-${project}/src/" />
+		<property name="bin.dir"          value="${ant.project.name}-${project}/bin/" />
+		<property name="bin.lib"          value="${ant.project.name}-${project}/libs" />
+		<property name="jar.name"         value="${ant.project.name}-${project}.jar" />
+		<property name="jar.name.source"  value="${ant.project.name}-${project}-sources.jar" />
+
+
+		<tstamp>
+			<format property="buildDate" pattern="yyyy-MM-dd" />
+			<format property="buildTime" pattern="HH:mm:ss" />
+		</tstamp>
+
+		<!-- Create bin jar -->
+		<jar destfile="${dist.dir}/${jar.name}">
+			<fileset dir="${bin.dir}" />
+			
+			<manifest>
+
+				<attribute name="Specification-Title"     value="${spec.title}" />
+				<attribute name="Specification-Version"   value="${spec.version}" />
+				<attribute name="Specification-Vendor"    value="${spec.vendor}" />
+				<attribute name="Implementation-Vendor"   value="${impl.title}" />
+
+				<attribute name="Built-Date"    value="${buildDate}" />
+				<attribute name="Built-Time"    value="${buildTime}" />
+			</manifest>
+		</jar>
+
+		<!-- Create source jar -->
+		<jar destfile="${dist.dir}/${jar.name.source}">
+			<fileset dir="${src.dir}" includes="**/*.java"/>
+				<!-- <zipgroupfileset file="${bin.lib}/*.jar">
+					<exclude name="*-natives.jar"/>
+					<exclude name="*-debug.jar"/>
+					<exclude name="android-*.jar"/>
+					<exclude name="gwt*.jar"/>
+				</zipgroupfileset>-->
+		</jar>
+
+		<echo message="---------------------------------------------"/>
+		<echo message="End packaging: ${project}"/>
+		<echo message="---------------------------------------------"/>
+
+	</target>
+
+	<!--  -->
+	<target name="generate-doc">
+	    
+		<javadoc	destdir="${dist.dir}/docs" 
+					sourcepath="${ant.project.name}-core/src/"
+					author="true" 
+					version="true" 
+					use="true"
+					windowtitle="flixel-gdx API" 
+					doctitle="flixel-gdx API" 
+					footer="flixel-gdx API" 
+					useexternalfile="true">
+			<header><![CDATA[
+			flixel-gdx API
+			<style>
+			body, td, th { font-family:Helvetica, Tahoma, Arial, sans-serif; font-size:10pt }
+			pre, code, tt { font-size:9pt; font-family:Lucida Console, Courier New, sans-serif }
+			h1, h2, h3, .FrameTitleFont, .FrameHeadingFont, .TableHeadingColor font { font-size:105%; font-weight:bold }
+			.TableHeadingColor { background:#EEEEFF; }
+			a { text-decoration:none }
+			a:hover { text-decoration:underline }
+			a:link, a:visited { color:blue }
+			table { border:0px }
+			.TableRowColor td:first-child { border-left:1px solid black }
+			.TableRowColor td { border:0px; border-bottom:1px solid black; border-right:1px solid black }
+			hr { border:0px; border-bottom:1px solid #333366; }
+			</style>
+			]]></header>
+			<bottom><![CDATA[
+			<div style="font-size:9pt"><i>
+			Copyright &copy; 2011-2014 Ka Wing Chin, Thomas Weston
+			</i></div>
+			]]></bottom>
+
+			<classpath>
+				<fileset dir="${ant.project.name}-core/libs" />
+			</classpath>
+		</javadoc>	    
+	</target>
+	
+	<!-- ================================= 
+          target: compress-dist
+          
+          Create zip file with the library
+                        
+         ================================= -->
+	<target name="compress-dist">
+    	
+		<echo message="---------------------------------------------"/>
+		<echo message="Start Compress"/>
+		<echo message="---------------------------------------------"/>
+		
+		<property name="licences"       value="${dist.dir}/licences" />
+		<property name="compress"       value="${dist.dir}/compress" />
+		
+		<mkdir dir="${licences}" />
+		<mkdir dir="${compress}" />
+		
+		<copy file="CC-LICENSE.md" todir="${licences}"/>
+		<copy file="LICENSE.md" todir="${licences}"/>
+		<copy file="README.md" todir="${licences}"/>
+		
+		<!-- Compress javadoc in a zip file -->		
+		<!-- <zip destfile="${dist.dir}/flixel-gdx-javadoc.zip" >
+		<fileset dir="${dist.dir}/docs" />
+		</zip>-->
+		
+		<!-- Generate the final zip with the library, javadoc and licences -->
+		<zip destfile="${compress}/${ant.project.name}-nightly.zip" >
+			<fileset dir="${dist.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+			
+			<!--  <fileset dir="${dist.dir}">
+				<include name="docs/**/**.*" />
+			</fileset>-->
+			
+			<fileset dir="${licences}" />
+		</zip>
+		
+		<delete dir="${licences}" />
+    	
+		<echo message="---------------------------------------------"/>
+		<echo message="End Compress"/>
+		<echo message="---------------------------------------------"/>
+    	
+	</target>
+
+</project>
