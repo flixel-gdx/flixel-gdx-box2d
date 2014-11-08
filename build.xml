@@ -155,7 +155,7 @@
 	<!--  -->
 	<target name="generate-doc">
 	    
-		<javadoc	destdir="${dist.dir}/docs" 
+		<javadoc	destdir="${dist.dir}/extensions/flxbox2d/docs" 
 					sourcepath="${ant.project.name}-core/src/"
 					author="true" 
 					version="true" 
