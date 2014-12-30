@@ -2,6 +2,9 @@
 ##What is FlxBox2D?
 FlxBox2D is a wrapper for Box2D through libgdx. The Box2D is a full JNI wrapper which means there's no garabage collection issues at all and the JNI call overhead is minimal.
 
+###Build status
+![Build Status](http://jenkins.flixel-gdx.com:8180/job/flixel-gdx-box2d/badge/icon)
+
 Box2D is originally written in C++ by Erin Catto and has been ported to many other programming language and environments. Libgdx team wrote a JNI wrapper for Box2D C++ and flixel-gdx team wrote a plugin, which named FlxBox2D, to make a tad easier to write code with Box2D in flixel.
 
 ####License
