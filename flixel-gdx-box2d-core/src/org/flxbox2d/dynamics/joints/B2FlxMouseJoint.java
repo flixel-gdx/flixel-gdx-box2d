@@ -27,6 +27,10 @@ import flash.display.Graphics;
 public class B2FlxMouseJoint extends FlxBasic
 {	
 	/**
+	 * Corresponding pointer index
+	 */
+	private int _pointer;
+	/**
 	 * The definition of the mouse joint.
 	 */
 	private MouseJointDef _mouseJointDef;
@@ -73,13 +77,24 @@ public class B2FlxMouseJoint extends FlxBasic
 	/**
 	 * Constructor
 	 */
-	public B2FlxMouseJoint()
+	public B2FlxMouseJoint(int Pointer) 
 	{
+		_pointer = Pointer;
 		_mouseJointDef = new MouseJointDef();
 		_groundBody = B2FlxB.world.createBody(new BodyDef());
 		_testPoint = new Vector2();
 		_mouseTarget = new Vector2();
 		_removeBySchedule = false;
+	}
+	
+	public B2FlxMouseJoint()
+	{
+		this(0);
+	}
+	
+	public int getPointer() 
+	{
+		return _pointer;
 	}
 	
 	/**
@@ -96,35 +111,35 @@ public class B2FlxMouseJoint extends FlxBasic
 	/**
 	 * Updates the mouse position in box2d world.
 	 */
-	private void updateMouseWorld()
+	public void updateMouseWorld()
 	{
-		_mouseWorldX = FlxG.mouse.x / B2FlxB.RATIO;
-		_mouseWorldY = FlxG.mouse.y / B2FlxB.RATIO;
+		_mouseWorldX = FlxG.mouse.getWorldPosition(_pointer).x / B2FlxB.RATIO;
+		_mouseWorldY = FlxG.mouse.getWorldPosition(_pointer).y / B2FlxB.RATIO;
 	}
 	
 	/**
 	 * Check whether a body got pressed.
 	 */
-	@SuppressWarnings("unchecked")
-	private boolean mouseDown()
+	@SuppressWarnings("unchecked") 
+	public boolean mouseDown()
 	{
-		if(_mouseJoint == null && FlxG.mouse.justPressed())
+		if(_mouseJoint == null && FlxG.mouse.justPressed(_pointer))
 		{
 			_hitBody = null;
 			_testPoint.set(_mouseWorldX, _mouseWorldY);
 			B2FlxB.world.QueryAABB(getBodyCallback, _testPoint.x - 0.0001f, _testPoint.y - 0.0001f, _testPoint.x + 0.0001f, _testPoint.y + 0.0001f);
-			
+
 			if (_hitBody == _groundBody || _hitBody == null)
 				return false;
-			
+
 			ObjectMap<String, Object> userData = (ObjectMap<String, Object>) _hitBody.getUserData();
 			if(userData == null)
 				return false;
-			
+
 			// ignore kinematic bodies, they don't work with the mouse joint
 			if (_hitBody != null && _hitBody.getType() == BodyType.KinematicBody || !(Boolean)userData.get("draggable")) 
 				return false;
-			
+
 			// if we hit something we pass the data to the mouse joint.
 			// and attach it to the hit body.
 			if (_hitBody != null) 
@@ -151,7 +166,7 @@ public class B2FlxMouseJoint extends FlxBasic
 	 */
 	public boolean mouseDrag()
 	{
-		if(_mouseJoint != null && FlxG.mouse.pressed())
+		if(_mouseJoint != null && FlxG.mouse.pressed(_pointer))
 		{	
 			_mouseJoint.setTarget(_mouseTarget.set(_mouseWorldX, _mouseWorldY));
 			return true;
@@ -162,12 +177,14 @@ public class B2FlxMouseJoint extends FlxBasic
 	/**
 	 * On release the mouse joint will be destroyed.
 	 */
-	private void mouseUp()
+	public boolean mouseUp()
 	{
-		if(FlxG.mouse.justReleased())
+		if(FlxG.mouse.justReleased(_pointer))
 		{
 			kill();
+			return true;
 		}
+		return false;
 	}
 	
 	/**
@@ -177,7 +194,7 @@ public class B2FlxMouseJoint extends FlxBasic
 	@Override
 	public void kill()
 	{
-		if((!B2FlxB.world.isLocked() && !FlxG.mouse.pressed() && _mouseJoint != null) || _removeBySchedule)
+		if((!B2FlxB.world.isLocked() && !FlxG.mouse.pressed(_pointer) && _mouseJoint != null) || _removeBySchedule)
 		{
 			ObjectMap<String, Object> userData = (ObjectMap<String, Object>) _hitBody.getUserData();
 			if(userData != null && (Boolean)userData.get("exists"))
